@@ -1,7 +1,17 @@
 
-This module is provided under the MIT license, and contributions are welcome, but notably, it was created with the very specific Hillwood Park environments in mind. As published, we expect it's unlikely to provide much benefit in other environments without significant development effort, and we hope and expect there are already better similar tools for some other environments. At the time this module is initially published, we use Nodejs, typically v22.12.0 or newer, predominantly in Google Cloud's App Engine and Cloud Run environments and locally on macOS.
+![Vitest](https://github.com/HillwoodPark/gcp-logger/actions/workflows/vitest.yml/badge.svg)
 
-This module provides a few convenience functions to help translate our notion of an error or log message into a Node Console log, warn, or error message that's more or less compatible with the Google [Logging agent](https://cloud.google.com/logging/docs/agent/logging) and/or [Ops Agent](https://cloud.google.com/logging/docs/agent/ops-agent). These agents are used by default in various Google Cloud environments such as App Engine and Cloud Run, and turn formatted stdout and stderr messages into Google Cloud Log entries. If you need more control of logging, and can create code tightly coupled to the Google Cloud Environment, there are other libraries available that provide a much more integrated interface to the Ops Agent and Google Logging API.
+# Hillwood Park GCP Logger
+
+Nodejs Logger for Google Cloud Platform
+
+Part of https://epicroadtripplanner.com. Let's GO!
+
+**Note:** This module is provided under the MIT license, and both forks and contributions are certainly welcome, but notably, it was created with the very specific Hillwood Park environments in mind. As published, we expect it's unlikely to provide much benefit in other environments without significant development effort, and we hope and expect there are already better similar tools for some other environments. At the time this module is initially published, we use Nodejs, typically v22.12.0 or newer, predominantly in Google Cloud's App Engine and Cloud Run environments and locally on macOS.
+
+This module provides a few convenience functions to help translate our notion of an error or log message into a Node Console log, warn, or error message that's more or less compatible with the Google [Logging agent](https://cloud.google.com/logging/docs/agent/logging) and/or [Ops Agent](https://cloud.google.com/logging/docs/agent/ops-agent). These agents are used by default in various Google Cloud environments such as App Engine and Cloud Run, and turn formatted stdout and stderr messages into Google Cloud Log entries. If you need more control of logging, and can create code tightly coupled to the Google Cloud Environment, there are other libraries available that provide a much more integrated interface to the Ops Agent and Google Logging API. 
+
+In addition, there are quite a few full-featured, [widely-adopted logging libraries for Node](https://betterstack.com/community/guides/logging/best-nodejs-logging-libraries/). We'll almost certainly eventually adopt one, too, in fact, but this one is lightweight, evolved organically on our team, and meets our needs at the moment.
 
 When running locally, it may be helpful to use the [`jq`](https://github.com/jqlang/jq) command line process to render the output in a more human-readable format. For example the following command line uses the TypeScript watcher to recompine and run 'app.js' with the json output formatted with jq and non-json output echoed verbatim.
 ```

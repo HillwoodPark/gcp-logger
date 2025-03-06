@@ -1,7 +1,7 @@
 {
   "name": "@hillwoodpark/gcp-logger",
   "version": "1.0.0",
-  "description": "Logger that creates messages in a format that is compatible with Google Cloud Platform log-scraping in App Engine, Google Cloud Functions, and probably several other services",
+  "description": "Logger that creates messages in a format that is roughly compatible with Google Cloud Platform log-scraping in App Engine, Google Cloud Functions, and probably several other services",
   "keywords": [
     "Node",
     "GCP",
