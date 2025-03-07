@@ -135,7 +135,7 @@ export function logWarning(message: string, jsonPayload?: any) {
 }
 
 export function logError(message: string, jsonPayload?: any) {
-  getInstance().logWarning(message, jsonPayload);
+  getInstance().logError(message, jsonPayload);
 }
 
 export function setSeverity(severity: LogSeverity) {
