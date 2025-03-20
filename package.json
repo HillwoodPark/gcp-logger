@@ -1,6 +1,6 @@
 {
   "name": "@hillwoodpark/gcp-logger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Logger that creates messages in a format that is roughly compatible with Google Cloud Platform log-scraping in App Engine, Google Cloud Functions, and probably several other services",
   "keywords": [
     "Node",
@@ -18,7 +18,10 @@
   "license": "MIT",
   "author": "Tim Johns",
   "type": "module",
-  "main": "dist/index.js",
+  "exports": {
+      ".": "./dist/logger.js"
+  },
+  "types": "./dist/logger.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "NODE_OPTIONS='--trace-deprecation' vitest --typecheck.enabled --typecheck.checker=tsc"
