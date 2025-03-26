@@ -17,6 +17,9 @@
   },
   "license": "MIT",
   "author": "Tim Johns",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "type": "module",
   "exports": {
       ".": "./dist/logger.js"
