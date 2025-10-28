@@ -30,7 +30,7 @@
     "test": "NODE_OPTIONS='--trace-deprecation' vitest --typecheck.enabled --typecheck.checker=tsc"
   },
   "devDependencies": {
-    "@types/node": "24.9.1",
+    "@types/node": "24.9.2",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
     "vitest": "4.0.4"
