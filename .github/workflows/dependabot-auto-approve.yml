@@ -10,6 +10,10 @@ permissions:
 
 jobs:
   dependabot-auto-merge:
+    permissions:
+      id-token: write
+      pull-requests: write
+      contents: write
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     uses: HillwoodPark/shared-github-workflows/.github/workflows/dependabot-auto-approve.yml@main
     secrets:
