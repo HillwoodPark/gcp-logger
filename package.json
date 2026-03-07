@@ -1,6 +1,6 @@
 {
   "name": "@hillwoodpark/gcp-logger",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Logger that creates messages in a format that is roughly compatible with Google Cloud Platform log-scraping in App Engine, Google Cloud Functions, and probably several other services",
   "keywords": [
     "Node",
@@ -22,7 +22,7 @@
   },
   "type": "module",
   "exports": {
-      ".": "./dist/logger.js"
+    ".": "./dist/logger.js"
   },
   "types": "./dist/logger.d.ts",
   "scripts": {
