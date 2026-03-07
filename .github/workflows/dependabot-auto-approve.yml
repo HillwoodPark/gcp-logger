@@ -20,5 +20,5 @@ jobs:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     with:
-      node-version: '22.19.0'
+      node-version: '24.x'
       npm-registry-url: 'https://npm.pkg.github.com'
