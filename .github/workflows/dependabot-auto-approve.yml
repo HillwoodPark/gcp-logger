@@ -7,8 +7,31 @@ on:
 permissions:
   pull-requests: write
   contents: write
+  id-token: write
 
 jobs:
+  claude-review-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Claude Code Input Validation
+        run: |
+          if [[ -z "$ANTHROPIC_API_KEY" ]]; then
+            echo "::error::ANTHROPIC_API_KEY is missing"
+            exit 1
+          fi
+          if [[ ${#ANTHROPIC_API_KEY} -le 5 ]]; then
+            echo "::error::ANTHROPIC_API_KEY has incorrect length"
+            exit 1
+          fi
+          if [[ -z "$NPM_TOKEN" ]]; then
+            echo "::error::NPM_TOKEN is missing"
+            exit 1
+          fi
+          echo "Using ANTHROPIC_API_KEY ${ANTHROPIC_API_KEY:0:12}..."
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
   dependabot-auto-merge:
     permissions:
       id-token: write
@@ -16,7 +39,7 @@ jobs:
       contents: write
       actions: read
     if: github.event.pull_request.user.login == 'dependabot[bot]'
-    uses: HillwoodPark/shared-github-workflows/.github/workflows/dependabot-auto-approve.yml@a1027dc5879df3ef302ee6c2a69364b269b4f2d8
+    uses: HillwoodPark/shared-github-workflows/.github/workflows/dependabot-auto-approve.yml@1def21cadec4dfa643f307c3a9b82a7785b8c715
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
