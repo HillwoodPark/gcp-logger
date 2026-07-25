@@ -39,7 +39,7 @@ jobs:
       contents: write
       actions: read
     if: github.event.pull_request.user.login == 'dependabot[bot]'
-    uses: HillwoodPark/shared-github-workflows/.github/workflows/dependabot-auto-approve.yml@1def21cadec4dfa643f307c3a9b82a7785b8c715
+    uses: HillwoodPark/shared-github-workflows/.github/workflows/dependabot-auto-approve.yml@a4002793d4b1e5c805137b9e5d323987781f0eb8
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
