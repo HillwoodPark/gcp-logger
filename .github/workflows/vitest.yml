@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         node-version: ['22.x', '24.x', '26.x']
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
@@ -30,3 +31,31 @@ jobs:
     - run: npm ci --ignore-scripts
     - run: npm run build --if-present
     - run: npm test
+
+  # Stable required-check context. The matrix job above reports as
+  # `build (22.x)` / `build (24.x)` / `build (26.x)`, so a ruleset pinned to one
+  # of those is coupled to the matrix contents AND gates only that single leg.
+  # This job has no matrix, so its context name never changes, and it fails if
+  # ANY leg failed.
+  #
+  # `if: always()` is load-bearing: without it a failed leg would skip this job,
+  # and GitHub reports a skipped required check as SUCCESSFUL.
+  #
+  # `skipped` is accepted because the matrix job deliberately skips itself on
+  # Dependabot PRs -- those are gated by the shared auto-merge workflow's own
+  # build job instead.
+  build-gate:
+    needs: [build]
+    if: always()
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+    - name: Require every matrix leg
+      env:
+        RESULT: ${{ needs.build.result }}
+      run: |
+        echo "matrix result: $RESULT"
+        case "$RESULT" in
+          success|skipped) ;;
+          *) exit 1 ;;
+        esac
