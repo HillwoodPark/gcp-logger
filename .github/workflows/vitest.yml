@@ -31,6 +31,9 @@ jobs:
     - run: npm ci --ignore-scripts
     - run: npm run build --if-present
     - run: npm test
+    - name: CANARY - fail the 22.x leg only
+      if: matrix.node-version == '22.x'
+      run: exit 1
 
   # Stable required-check context. The matrix job above reports as
   # `build (22.x)` / `build (24.x)` / `build (26.x)`, so a ruleset pinned to one
