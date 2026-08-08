@@ -139,6 +139,7 @@ src/
 test/
 tsconfig.json
 .github/
+.nvmrc
 # mocks/ TODO(tjohns) This project doesn't HAVE mocks, yet, BUT I actually DO 
 # often want to include mocks, but typically only for DevDependencies. Until 
 # we can figure out how to create both a "standard" npm module and one that 
