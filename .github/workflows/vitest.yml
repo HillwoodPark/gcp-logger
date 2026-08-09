@@ -5,14 +5,12 @@ name: Node.js CI
 
 on:
   push:
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
   build:
-    # Skip this build job for dependabot PRs, which have their own build job
-    if: github.event.pull_request.user.login != 'dependabot[bot]'
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -41,9 +39,8 @@ jobs:
   # `if: always()` is load-bearing: without it a failed leg would skip this job,
   # and GitHub reports a skipped required check as SUCCESSFUL.
   #
-  # `skipped` is accepted because the matrix job deliberately skips itself on
-  # Dependabot PRs -- those are gated by the shared auto-merge workflow's own
-  # build job instead.
+  # `skipped` is still accepted defensively: if a job-level `if:` is ever added
+  # back to the matrix job, this gate must not start failing every PR.
   build-gate:
     needs: [build]
     if: always()
