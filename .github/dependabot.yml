@@ -5,6 +5,18 @@
 
 version: 2
 updates:
+  # Keep action pins current. Pinning without updating just freezes the repo on
+  # whatever was current at pin time. First-party HillwoodPark refs (the shared
+  # reusable workflows) are exempt from the cooldown so pin bumps propagate
+  # immediately instead of by hand.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 3
+      exclude:
+        - "HillwoodPark/*"
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     registries: "*"
