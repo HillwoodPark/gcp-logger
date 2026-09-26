@@ -7,26 +7,43 @@ version: 2
 updates:
   # Keep action pins current. Pinning without updating just freezes the repo on
   # whatever was current at pin time. First-party HillwoodPark refs (the shared
-  # reusable workflows) are exempt from the cooldown so pin bumps propagate
-  # immediately instead of by hand.
+  # reusable workflows) are exempt from the cooldown so pin bumps propagate at
+  # the next weekly run instead of by hand.
+  #
+  # Both ecosystems run weekly with minor/patch bumps grouped into one PR: every
+  # Dependabot PR costs billed Actions minutes, so one batch a week replaces a
+  # PR per bump. Majors stay individual PRs so they're still held for review.
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
     cooldown:
       default-days: 3
       exclude:
         - "HillwoodPark/*"
+    groups:
+      github-actions:
+        patterns: ["*"]
+        # Shared-workflow pin bumps stay their own PR: auto-merge-digest matches
+        # on that PR's title, and a release:major bump must stay individually held.
+        exclude-patterns: ["HillwoodPark/*"]
+        update-types: ["minor", "patch"]
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     registries: "*"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
     # Supply-chain cooldown: hold new releases 3 days (first-party @hillwoodpark exempt)
     cooldown:
       default-days: 3
       exclude:
         - "@hillwoodpark/*"
+    groups:
+      npm:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
 registries:
   npm-github:
     type: npm-registry
